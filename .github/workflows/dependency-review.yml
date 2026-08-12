@@ -15,7 +15,12 @@ jobs:
     steps:
       - name: 'Checkout repository'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
         with:
           comment-summary-in-pr: always
+          base-ref: ${{ github.event.before }}
+          head-ref: ${{ github.sha }}
